@@ -9,5 +9,44 @@
 </head>
 <body>
 <p>Hello World</p>
+<table>
+    <thead>
+        <tr>
+            <th>
+                <span th:utext="#{start.songName}">songName</span>
+            </th>
+            <th>
+                <span th:utext="#{start.artist}">artist</span>
+            </th>
+            <th>
+                <span th:utext="#{start.issuer}">issuer</span>
+            </th>
+            <th>
+                <span th:utext="#{start.upvotes}">upvotes</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:if="${#maps.isEmpty(wishlist)}">
+            <td colspan="4">
+                <span th:utext="#{start.nothingToShow}"></span>
+            </td>
+        </tr>
+    <tr th:each="wishEntry : ${wishlist}">
+        <td>
+            <span th:utext="${wishEntry.key.songName}"></span>
+        </td>
+        <td>
+            <span th:utext="${wishEntry.key.artist}"></span>
+        </td>
+        <td>
+            <span th:utext="${wishEntry.key.issuer}"></span>
+        </td>
+        <td>
+            <span th:utext="${wishEntry.value}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
