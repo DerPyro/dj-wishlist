@@ -31,6 +31,7 @@ public class GuestController {
 
 	@PostMapping("/upvote/{id}")
 	public String upvote(@PathVariable("id") UUID id) {
+	  log.info("Upvoting " + id.toString());
 		wishlistService.upvote(id);
 		return "redirect:/";
 	}
