@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+    <div th:fragment="addWishDialog">
+        <div class="modal fade">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+						<h4
+							class="modal-title"
+							th:utext="#{add.wish.title}"
+						>
+							Modal Heading
+						</h4>
+						<button
+							type="button"
+							class="close"
+							data-dismiss="modal"
+						>
+							&times;
+						</button>
+					</div>
+                    <div
+						class="modal-body"
+						style="text-align: center;"
+					>
+                    <form
+						method="post"
+						th:action="@{/inventory/__${id}__/add}"
+						th:object="${amount}"
+					>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

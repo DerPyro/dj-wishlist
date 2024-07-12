@@ -1,79 +1,127 @@
 <!DOCTYPE html>
 <html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title th:utext="#{start.title}"></title>
-    <script src="https://kit.fontawesome.com/872ebac07c.js" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
-<body>
-<h1 th:utext="#{start.title}" style="text-align: center;"></h1>
-<table style="margin-left: auto; margin-right: auto;" class="table table-dark table-bordered">
-    <thead>
+    <script
+      src="https://kit.fontawesome.com/872ebac07c.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div
+      class="modal fade"
+      id="addWishDialog"
+      tabindex="-1"
+      aria-labelledby="addWishDialogLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" th:utext="#{add.wish.title}">
+              Modal Heading
+            </h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" style="text-align: center">
+            <form
+              method="post"
+              th:action="@{/inventory/__${id}__/add}"
+              th:object="${amount}"
+            ></form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h1 th:utext="#{start.title}" style="text-align: center"></h1>
+    <table
+      style="margin-left: auto; margin-right: auto"
+      class="table table-dark table-bordered"
+    >
+      <thead>
         <tr>
-            <th>
-                <span th:utext="#{start.songName}">songName</span>
-            </th>
-            <th>
-                <span th:utext="#{start.artist}">artist</span>
-            </th>
-            <th>
-                <span th:utext="#{start.issuer}">issuer</span>
-            </th>
-            <th style="text-align: center;">
-                <span th:utext="#{start.upvotes}">upvotes</span>
-            </th>
-            <th style="text-align: center;">
-                <a
-                    role="button",
-                    class="btn fa-solid fa-plus"
-                    style="color: green;"
-                    th:href="@{'/add'}"
-                    th:title="#{start.addWish}"
-                ></a>
-            </th>
+          <th>
+            <span th:utext="#{start.songName}">songName</span>
+          </th>
+          <th>
+            <span th:utext="#{start.artist}">artist</span>
+          </th>
+          <th>
+            <span th:utext="#{start.issuer}">issuer</span>
+          </th>
+          <th style="text-align: center">
+            <span th:utext="#{start.upvotes}">upvotes</span>
+          </th>
+          <th style="text-align: center">
+            <button
+              type="button"
+              class="btn fa-solid fa-plus"
+              style="color: green"
+              th:title="#{start.addWish}"
+              data-bs-toggle="modal"
+              data-bs-target="#addWishDialog"
+            ></button>
+          </th>
         </tr>
-    </thead>
-    <tbody style="text-align: right;">
+      </thead>
+      <tbody style="text-align: right">
         <tr th:if="${#maps.isEmpty(wishlist)}">
-            <td colspan="5">
-                <span th:utext="#{start.nothingToShow}"></span>
-            </td>
+          <td colspan="5">
+            <span th:utext="#{start.nothingToShow}"></span>
+          </td>
         </tr>
-    <tr th:each="wishEntry : ${wishlist}">
-        <td>
+        <tr th:each="wishEntry : ${wishlist}">
+          <td>
             <span th:utext="${wishEntry.key.songName}"></span>
-        </td>
-        <td>
+          </td>
+          <td>
             <span th:utext="${wishEntry.key.artist}"></span>
-        </td>
-        <td>
+          </td>
+          <td>
             <span th:utext="${wishEntry.key.issuer}"></span>
-        </td>
-        <td style="text-align: center;">
+          </td>
+          <td style="text-align: center">
             <span th:utext="${wishEntry.value}"></span>
-        </td>
-        <td style="text-align: center;">
-            <form method="post" th:action="@{'/upvote/__${wishEntry.key.id}__'}">
-                <button
+          </td>
+          <td style="text-align: center">
+            <form
+              method="post"
+              th:action="@{'/upvote/__${wishEntry.key.id}__'}"
+            >
+              <button
                 class="btn fa-regular fa-heart"
-                style="color: white;"
-                th:title="#{start.addWish}"></button>
-
-            </form>
-            <!--<a
-                role="button",
-                class="btn fa-regular fa-heart"
-                style="color: white;"
-                th:href="@{'/upvote/__${wishEntry.key.id}__'}"
+                style="color: white"
                 th:title="#{start.addWish}"
-            ></a>-->
-        </td>
-    </tr>
-    </tbody>
-</table>
-</body>
+              ></button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
 </html>
