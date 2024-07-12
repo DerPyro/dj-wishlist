@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -25,7 +29,16 @@ public class GuestController {
 
 	@GetMapping
 	public String openStartPage(Model model) {
-		model.addAttribute("wishlist", wishlistService.getWishes());
+		var wishlist = wishlistService.getWishes().entrySet().stream()
+				.sorted(Map.Entry.<Wish, Integer>comparingByValue().reversed())
+				.collect(Collectors.toMap(
+						Map.Entry::getKey,
+						Map.Entry::getValue,
+						(e1, e2) -> e1,
+						LinkedHashMap::new
+				));
+		model.addAttribute("wishlist", wishlist);
+		model.addAttribute("newWish", new Wish());
 		return "start";
 	}
 
@@ -39,9 +52,9 @@ public class GuestController {
 	@PostMapping
 	public String addWish(@ModelAttribute Wish wish) {
 		wish.setId(UUID.randomUUID());
+		log.info("saving wish: " + wish);
 		wishlistService.addWish(wish);
 		return "redirect:/";
-
 	}
 
 }

@@ -27,7 +27,7 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body style="background-color: var(--bs-dark);">
     <div
       class="modal fade"
       id="addWishDialog"
@@ -36,7 +36,7 @@
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content" style="background-color: var(--bs-gray-dark); color: white;">
           <div class="modal-header">
             <h4 class="modal-title" th:utext="#{add.wish.title}">
               Modal Heading
@@ -49,16 +49,47 @@
             ></button>
           </div>
           <div class="modal-body" style="text-align: center">
-            <form
-              method="post"
-              th:action="@{/inventory/__${id}__/add}"
-              th:object="${amount}"
-            ></form>
+            <form method="post" th:action="@{/}" th:object="${newWish}">
+              <div class="row">
+                <div class="col-4">
+                  <p
+                    style="white-space: nowrap"
+                    th:utext="#{start.songName}"
+                  ></p>
+                </div>
+                <div class="col-8">
+                  <input th:field="*{songName}" style="background-color: var(--bs-dark); color:white"/>
+                </div>
+
+                <div class="col-4">
+                  <p style="white-space: nowrap" th:utext="#{start.artist}"></p>
+                </div>
+                <div class="col-8">
+                  <input th:field="*{artist}" style="background-color: var(--bs-dark); color:white"/>
+                </div>
+
+                <div class="col-4">
+                  <p style="white-space: nowrap" th:utext="#{start.issuer}"></p>
+                </div>
+                <div class="col-8">
+                  <input th:field="*{issuer}" style="background-color: var(--bs-dark); color:white"/>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    th:title="#{add.wish.send}"
+                    style="width: 70%"
+                  >
+                    <i class="fa-regular fa-paper-plane"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    <h1 th:utext="#{start.title}" style="text-align: center"></h1>
+    <h1 th:utext="#{start.title}" style="text-align: center; color: white"></h1>
     <table
       style="margin-left: auto; margin-right: auto"
       class="table table-dark table-bordered"
@@ -91,8 +122,8 @@
       </thead>
       <tbody style="text-align: right">
         <tr th:if="${#maps.isEmpty(wishlist)}">
-          <td colspan="5">
-            <span th:utext="#{start.nothingToShow}"></span>
+          <td style="text-align: center" colspan="5">
+            <strong th:utext="#{start.nothingToShow}"></strong>
           </td>
         </tr>
         <tr th:each="wishEntry : ${wishlist}">

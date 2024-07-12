@@ -19,13 +19,6 @@ public class WishlistService {
 	@Getter
 	private final Map<Wish, Integer> wishes = new ConcurrentHashMap<>();
 
-	@PostConstruct
-	public void x() {
-		addWish(new Wish(UUID.randomUUID(),"Bier","KIZ","Moe"));
-		addWish(new Wish(UUID.randomUUID(),"Aliße kacken gehen","","BDSM Hooligan"));
-		addWish(new Wish(UUID.randomUUID(),"Hypö Hypä","Electric Callboy","Gabibi"));
-	}
-
 	public boolean addWish(Wish wish) {
 		wishes.put(wish, 0);
 		return true;
