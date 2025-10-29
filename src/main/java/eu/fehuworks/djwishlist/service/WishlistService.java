@@ -1,46 +1,105 @@
 package eu.fehuworks.djwishlist.service;
 
+import eu.fehuworks.djwishlist.model.User;
+import eu.fehuworks.djwishlist.model.Vote;
 import eu.fehuworks.djwishlist.model.Wish;
-import jakarta.annotation.PostConstruct;
-import lombok.Getter;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class WishlistService {
 
-	@Getter
-	private final Map<Wish, Integer> wishes = new ConcurrentHashMap<>();
+  private final UserService userService;
 
-	public boolean addWish(Wish wish) {
-		wishes.put(wish, 0);
-		return true;
-	}
+  @Getter private final Map<Wish, Vote> wishes = new ConcurrentHashMap<>();
 
-	public boolean removeWish(UUID id) {
-		var wish = wishes.entrySet().stream().filter(w -> w.getKey().getId().equals(id)).findFirst();
-		if (wish.isPresent()) {
-			wishes.remove(wish.get().getKey());
-			return true;
-		}
-		return false;
-	}
+  public boolean addWish(Wish wish) {
+    wishes.put(wish, new Vote(0, 0));
+    logMap();
+    return true;
+  }
 
-	public boolean upvote(UUID id) {
-		var wish = wishes.entrySet().stream().filter(w -> w.getKey().getId().equals(id)).findFirst();
-		if (wish.isPresent()) {
-			wishes.put(wish.get().getKey(), wish.get().getValue() + 1);
-			return true;
-		}
-		return false;
-	}
+  public void updateUsernames(String sessionId) {
+    wishes.keySet().stream()
+        .filter(wish -> wish.getIssuerId().equals(sessionId))
+        .forEach(
+            wish -> {
+              String issuerName = userService.getUser(wish.getIssuerId()).getName();
+              wish.setIssuer(issuerName);
+            });
+    logMap();
+  }
 
+  public boolean removeWish(UUID id, User user) {
+    var wishEntry =
+        wishes.entrySet().stream().filter(w -> w.getKey().getId().equals(id)).findFirst();
+    if (wishEntry.isPresent()) {
+      Wish wish = wishEntry.get().getKey();
+      if (user.isAdmin() || wish.canBeDeletedBy(user.getSessionId())) {
+        wishes.remove(wish);
+        logMap();
+        return true;
+      }
+    }
+    logMap();
+    return false;
+  }
 
+  private void logMap() {
+    log.info("+++++ Current Wishes +++++");
+    wishes.forEach(
+        (wish, vote) ->
+            log.info(
+                "Wish: {} | Upvotes: {} | Downvotes: {}",
+                wish.getId(),
+                vote.getUpvotes(),
+                vote.getDownvotes()));
+  }
+
+  public boolean upvote(UUID id, String upvoter) {
+    var wishEntry =
+        wishes.entrySet().stream().filter(w -> w.getKey().getId().equals(id)).findFirst();
+    if (wishEntry.isPresent()) {
+      Wish wish = wishEntry.get().getKey();
+      wish.upvote(upvoter);
+      wishes.put(wish, getVote(wish));
+      logMap();
+      return true;
+    }
+    logMap();
+    return false;
+  }
+
+  private static Vote getVote(Wish wish) {
+    return new Vote(
+        (int)
+            wish.getVotes().entrySet().stream()
+                .filter(e -> e.getValue() == Wish.VoteType.UPVOTE)
+                .count(),
+        (int)
+            wish.getVotes().entrySet().stream()
+                .filter(e -> e.getValue() == Wish.VoteType.DOWNVOTE)
+                .count());
+  }
+
+  public boolean downvote(UUID id, String downvoter) {
+    var wishEntry =
+        wishes.entrySet().stream().filter(w -> w.getKey().getId().equals(id)).findFirst();
+    if (wishEntry.isPresent()) {
+      Wish wish = wishEntry.get().getKey();
+      wish.downvote(downvoter);
+      wishes.put(wish, getVote(wish));
+      logMap();
+      return true;
+    }
+    logMap();
+    return false;
+  }
 }

@@ -6,10 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <title th:utext="#{start.title}"></title>
-    <script
-      src="https://kit.fontawesome.com/872ebac07c.js"
-      crossorigin="anonymous"
-    ></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -26,6 +23,20 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+      <style>
+          .btn {
+              transition: color 0.3s ease; /* Sanfter Übergang */
+          }
+          .btn.white {
+              color: white;
+          }
+          .btn.red {
+              color: red;
+          }
+          .btn.green {
+              color: green;
+          }
+      </style>
   </head>
   <body style="background-color: var(--bs-dark);">
     <div
@@ -58,7 +69,7 @@
                   ></p>
                 </div>
                 <div class="col-8">
-                  <input th:field="*{songName}" style="background-color: var(--bs-dark); color:white"/>
+                  <input required th:field="*{songName}" style="background-color: var(--bs-dark); color:white"/>
                 </div>
 
                 <div class="col-4">
@@ -137,19 +148,35 @@
             <span th:utext="${wishEntry.key.issuer}"></span>
           </td>
           <td style="text-align: center">
-            <span th:utext="${wishEntry.value}"></span>
+            <span th:utext="${wishEntry.value.totalVotes}"></span>
           </td>
           <td style="text-align: center">
+              <div style="display: inline-flex">
+                  <div style="display: inline-flex" th:if="${not sessionId.equals(wishEntry.key.getIssuerId())}">
             <form
               method="post"
               th:action="@{'/upvote/__${wishEntry.key.id}__'}"
             >
               <button
-                class="btn fa-regular fa-heart"
-                style="color: white"
-                th:title="#{start.addWish}"
+                class="btn fa-solid fa-thumbs-up"
+                th:classappend="${wishEntry.key.isUpvotedBy(sessionId) ? 'green' : 'white'}"
               ></button>
             </form>
+              <a
+                      type="button"
+                      class="btn fa-solid fa-thumbs-down"
+                      th:classappend="${wishEntry.key.isDownvotedBy(sessionId) ? 'red' : 'white'}"
+                      th:href="@{'/downvote/__${wishEntry.key.id}__'}"
+              ></a>
+                  </div>
+              <a
+                      type="button"
+                      class="btn fa-solid fa-trash-can"
+                      style="color: white"
+                      th:href="@{'/delete/__${wishEntry.key.id}__'}"
+                      th:if="${wishEntry.key.canBeDeletedBy(sessionId) or isAdmin}"
+              ></a>
+              </div>
           </td>
         </tr>
       </tbody>
