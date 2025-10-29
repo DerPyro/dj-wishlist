@@ -22,7 +22,6 @@ public class WishlistService {
 
   public boolean addWish(Wish wish) {
     wishes.put(wish, new Vote(0, 0));
-    logMap();
     return true;
   }
 
@@ -34,7 +33,6 @@ public class WishlistService {
               String issuerName = userService.getUser(wish.getIssuerId()).getName();
               wish.setIssuer(issuerName);
             });
-    logMap();
   }
 
   public boolean removeWish(UUID id, User user) {
@@ -44,24 +42,12 @@ public class WishlistService {
       Wish wish = wishEntry.get().getKey();
       if (user.isAdmin() || wish.canBeDeletedBy(user.getSessionId())) {
         wishes.remove(wish);
-        logMap();
         return true;
       }
     }
-    logMap();
     return false;
   }
 
-  private void logMap() {
-    log.info("+++++ Current Wishes +++++");
-    wishes.forEach(
-        (wish, vote) ->
-            log.info(
-                "Wish: {} | Upvotes: {} | Downvotes: {}",
-                wish.getId(),
-                vote.getUpvotes(),
-                vote.getDownvotes()));
-  }
 
   public boolean upvote(UUID id, String upvoter) {
     var wishEntry =
@@ -70,10 +56,8 @@ public class WishlistService {
       Wish wish = wishEntry.get().getKey();
       wish.upvote(upvoter);
       wishes.put(wish, getVote(wish));
-      logMap();
       return true;
     }
-    logMap();
     return false;
   }
 
@@ -96,10 +80,8 @@ public class WishlistService {
       Wish wish = wishEntry.get().getKey();
       wish.downvote(downvoter);
       wishes.put(wish, getVote(wish));
-      logMap();
       return true;
     }
-    logMap();
     return false;
   }
 }
