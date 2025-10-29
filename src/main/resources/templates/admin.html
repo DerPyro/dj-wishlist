@@ -1,68 +1,80 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8" />
     <title th:utext="#{admin.title}"></title>
-    <script src="https://kit.fontawesome.com/875c1201af.js" crossorigin="anonymous"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.7.1.js"
-            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-            crossorigin="anonymous"
-    ></script>
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"
-    ></script>
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        /* ...bestehende Styles... */
+        @media (max-width: 480px) {
+            .admin-container {
+                padding: 1.2rem 0.5rem;
+                max-width: 98vw;
+            }
+
+            .form-control,
+            .btn-primary {
+                font-size: 1rem;
+            }
+        }
+    </style>
     <style>
         body {
+            background: linear-gradient(135deg, #232526 0%, #414345 100%);
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
+            justify-content: center;
         }
-        .container {
-            text-align: center;
-            border: 1px solid #ccc;
+
+        .admin-container {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+            padding: 2.5rem 2rem;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .form-label {
+            font-weight: 500;
+        }
+
+        .form-control {
             border-radius: 8px;
-            padding: 20px;
-            background-color: #fff;
+            margin-bottom: 1.2rem;
         }
-        input {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 80%;
-        }
-        button {
-            padding: 10px 20px;
-            margin-top: 15px;
-            cursor: pointer;
+
+        .btn-primary {
+            width: 100%;
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 0.75rem;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border: none;
         }
     </style>
 </head>
+
 <body>
-<form method="post" th:action="@{/admin}" th:object="${adminUser}">
-<div class="container">
-    <label for="username">Username</label>
-    <input type="text" id="username" th:field="*{username}">
-
-    <label for="password">Password</label>
-    <input type="text" id="password" th:field="*{password}">
-
-    <button type="submit">Absenden</button>
+<div class="admin-container">
+    <h2 class="mb-4 text-center" th:utext="#{admin.title}"></h2>
+    <form method="post" th:action="@{/admin}" th:object="${adminUser}">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" th:field="*{username}" class="form-control" required>
+        </div>
+        <div class="mb-4">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" th:field="*{password}" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Absenden</button>
+    </form>
 </div>
-</form>
 </body>
+
 </html>
