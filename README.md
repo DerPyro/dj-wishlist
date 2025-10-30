@@ -5,15 +5,15 @@ A program for DJs to easily manage music requests
 
 ```bash
 mvn clean package spring-boot:repackage
-docker build -t fehuworks/dj-wishlist:0.0.1 .
-docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.1
+docker build -t fehuworks/dj-wishlist:0.0.2 .
+docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
 ```
 
 ## How to push to Docker Hub
 
 ```bash
 docker login
-docker push fehuworks/dj-wishlist:0.0.1
+docker push fehuworks/dj-wishlist:0.0.2
 ```
 
 ## Get it from Dockerhub
