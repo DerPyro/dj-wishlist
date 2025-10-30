@@ -1,6 +1,5 @@
 package eu.fehuworks.djwishlist.service;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 

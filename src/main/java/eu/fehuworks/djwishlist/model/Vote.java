@@ -1,11 +1,9 @@
 package eu.fehuworks.djwishlist.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
 public class Vote implements Comparable<Vote> {
 

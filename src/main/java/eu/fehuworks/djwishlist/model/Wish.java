@@ -64,7 +64,7 @@ public class Wish {
 
   @Override
   public boolean equals(Object obj) {
-    return obj instanceof Wish && id.equals(((Wish) obj).getId());
+    return obj instanceof Wish wish && id.equals(wish.getId());
   }
 
   @Override

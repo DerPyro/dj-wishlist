@@ -48,7 +48,6 @@ public class WishlistService {
     return false;
   }
 
-
   public boolean upvote(UUID id, String upvoter) {
     var wishEntry =
         wishes.entrySet().stream().filter(w -> w.getKey().getId().equals(id)).findFirst();
