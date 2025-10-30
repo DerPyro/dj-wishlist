@@ -1,6 +1,5 @@
 package eu.fehuworks.djwishlist.service;
 
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 import java.util.UUID;
@@ -18,12 +17,17 @@ class AdminServiceTest {
 
   @BeforeEach
   void setUp() {
-    sut = new AdminService(userService);
+    sut = new AdminService(userService, "admin", "password123");
   }
 
   @Test
   void authenticate_validCredentials_returnsTrue() {
-    assertTrue(sut.authenticate("admin", "password123", UUID.randomUUID().toString()));
+    var expectedUsername = UUID.randomUUID().toString();
+    var expectedPassword = UUID.randomUUID().toString();
+
+    sut = new AdminService(userService, expectedUsername, expectedPassword);
+
+    assertTrue(sut.authenticate(expectedUsername, expectedPassword, UUID.randomUUID().toString()));
   }
 
   @Test
@@ -36,7 +40,7 @@ class AdminServiceTest {
     var expectedSessionId = UUID.randomUUID().toString();
     sut.authenticate("admin", "password123", expectedSessionId);
 
-    verify(userService).registerAdmin(eq(expectedSessionId), eq("admin"));
+    verify(userService).registerAdmin(expectedSessionId, "admin");
   }
 
   @Test
