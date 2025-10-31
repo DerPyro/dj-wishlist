@@ -1,5 +1,6 @@
 package eu.fehuworks.djwishlist.controller;
 
+import eu.fehuworks.djwishlist.model.User;
 import eu.fehuworks.djwishlist.model.Vote;
 import eu.fehuworks.djwishlist.model.Wish;
 import eu.fehuworks.djwishlist.service.UserService;
@@ -30,6 +31,10 @@ public class GuestController {
 
   @GetMapping
   public String openStartPage(Model model, HttpSession session) {
+    if (!userService.isUserKnown(session.getId())) {
+      return "redirect:/user";
+    }
+    User user = userService.getUser(session.getId());
     var wishlist =
         wishlistService.getWishes().entrySet().stream()
             .sorted(Map.Entry.<Wish, Vote>comparingByValue().reversed())
@@ -43,6 +48,7 @@ public class GuestController {
     }
     model.addAttribute("newWish", wish);
     model.addAttribute("sessionId", session.getId());
+    model.addAttribute("user", user);
     model.addAttribute("isAdmin", userService.getUser(session.getId()).isAdmin());
     return "start";
   }
@@ -63,9 +69,7 @@ public class GuestController {
 
   @PostMapping
   public String addWish(@ModelAttribute Wish wish, HttpSession session) {
-
     userService.add(session.getId(), wish.getIssuer());
-
     wish.setId(UUID.randomUUID());
     wish.setIssuerId(session.getId());
     log.info("saving wish: {} as {}", wish, session.getId());

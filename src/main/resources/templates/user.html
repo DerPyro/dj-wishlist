@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title th:utext="#{admin.title}"></title>
+    <title th:utext="#{user.title}"></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           crossorigin="anonymous" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,17 +62,14 @@
 
 <body>
 <div class="admin-container">
-    <h2 class="mb-4 text-center" th:utext="#{admin.title}"></h2>
-    <form method="post" th:action="@{/admin}" th:object="${adminUser}">
+    <h2 class="mb-4 text-center" th:utext="#{user.title}"></h2>
+    <form method="post" th:action="@{/user}" th:object="${user}">
         <div class="mb-3">
-            <label for="username" class="form-label" th:text="#{admin.name.label}">Username</label>
-            <input type="text" id="username" th:field="*{username}" class="form-control" required>
+            <label for="name" class="form-label" th:text="#{user.name.label}">Name</label>
+            <input hidden="hidden" type="text" id="sessionId" th:field="*{sessionId}" class="form-control">
+            <input type="text" id="name" th:field="*{name}" class="form-control" required>
         </div>
-        <div class="mb-4">
-            <label for="password" class="form-label" th:text="#{admin.password.label}">Password</label>
-            <input type="password" id="password" th:field="*{password}" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary" th:text="#{admin.button}">send</button>
+        <button type="submit" class="btn btn-primary" th:text="#{user.button}">send</button>
     </form>
 </div>
 </body>

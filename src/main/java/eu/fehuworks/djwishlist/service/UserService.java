@@ -14,7 +14,7 @@ public class UserService {
   private String adminSessionId = null;
 
   public void add(String sessionId, String name) {
-    users.put(sessionId, new User(sessionId, name));
+    users.put(sessionId, new User(sessionId, name, false));
   }
 
   public void registerAdmin(String sessionId, String name) {
@@ -23,7 +23,7 @@ public class UserService {
   }
 
   public User getUser(String sessionId) {
-    var user = users.getOrDefault(sessionId, new User(sessionId, null, false));
+    var user = users.getOrDefault(sessionId, new User(sessionId, "Guest-" + sessionId, false));
     if (sessionId.equals(adminSessionId)) {
       user.setAdmin(true);
     }
