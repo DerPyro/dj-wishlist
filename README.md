@@ -2,6 +2,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
 
 # dj-wishlist
+
 A program for DJs to easily manage music requests
 
 ## How to run
@@ -35,6 +36,7 @@ Other users can only vote for it.
 As admin, you can delete any song-wish.
 
 If you want to log in as admin, use the following default credentials:
+
 - Username: **admin**
 - Password: **password123**
 - Url: [`http://localhost:8080/admin`](http://localhost:8080/admin)
@@ -53,7 +55,7 @@ If you are not happy with the default values you can adjust these value:
 
 ### How do I use adjusted values?
 
-Instead of running 
+Instead of running
 
 ```bash
 docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
@@ -82,3 +84,15 @@ Just look at the logs:
 
 [![codecov](https://codecov.io/github/DerPyro/dj-wishlist/graphs/sunburst.svg?token=126XEV9W9H)](https://codecov.io/github/DerPyro/dj-wishlist)
 
+## Code Quality in Detail
+
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=bugs)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
