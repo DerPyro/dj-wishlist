@@ -1,11 +1,11 @@
 package eu.fehuworks.djwishlist.service;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import eu.fehuworks.djwishlist.model.User;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceTest {
 

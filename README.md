@@ -1,7 +1,7 @@
+[![codecov](https://codecov.io/github/DerPyro/dj-wishlist/graph/badge.svg?token=126XEV9W9H)](https://codecov.io/github/DerPyro/dj-wishlist)
+
 # dj-wishlist
 A program for DJs to easily manage music requests
-
-[![codecov](https://codecov.io/github/DerPyro/dj-wishlist/graph/badge.svg?token=126XEV9W9H)](https://codecov.io/github/DerPyro/dj-wishlist)
 
 ## How to run
 
@@ -76,3 +76,8 @@ Just look at the logs:
 2025-10-30T14:24:43.134Z  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
 ...
 ```
+
+## Code Coverage in Detail
+
+[![codecov](https://codecov.io/github/DerPyro/dj-wishlist/graphs/sunburst.svg?token=126XEV9W9H)](https://codecov.io/github/DerPyro/dj-wishlist)
+
