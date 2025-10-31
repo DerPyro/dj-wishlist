@@ -24,9 +24,7 @@ public class UserService {
 
   public User getUser(String sessionId) {
     var user = users.getOrDefault(sessionId, new User(sessionId, "Guest-" + sessionId, false));
-    if (sessionId.equals(adminSessionId)) {
-      user.setAdmin(true);
-    }
+    user.setAdmin(sessionId.equals(adminSessionId));
     return user;
   }
 
