@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/github/DerPyro/dj-wishlist/graph/badge.svg?token=126XEV9W9H)](https://codecov.io/github/DerPyro/dj-wishlist)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
 
 # dj-wishlist
 A program for DJs to easily manage music requests

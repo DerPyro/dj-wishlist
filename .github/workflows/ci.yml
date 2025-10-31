@@ -27,6 +27,15 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+      - name: SonarQube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn sonar:sonar \
+          -Dsonar.projectKey=DerPyro_dj-wishlist \
+          -Dsonar.host.url=https://sonarcloud.io/ \
+          -Dsonar.login=$SONAR_TOKEN
+
+
       - name: Build with Maven
         run: mvn package spring-boot:repackage -DskipTests
 
