@@ -1,6 +1,8 @@
 # dj-wishlist
 A program for DJs to easily manage music requests
 
+[![codecov](https://codecov.io/github/DerPyro/dj-wishlist/graph/badge.svg?token=126XEV9W9H)](https://codecov.io/github/DerPyro/dj-wishlist)
+
 ## How to run
 
 ```bash

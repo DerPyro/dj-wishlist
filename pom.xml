@@ -18,6 +18,7 @@
         <version.plugin.maven-resources-plugin>3.3.1</version.plugin.maven-resources-plugin>
         <version.plugin.maven-compiler-plugin>3.13.0</version.plugin.maven-compiler-plugin>
         <version.plugin.spotless-maven-plugin>2.46.1</version.plugin.spotless-maven-plugin>
+        <version.plugin.jacoco-maven-plugin>0.8.14</version.plugin.jacoco-maven-plugin>
 
         <version.dependency.jackson-databind>3.0.1</version.dependency.jackson-databind>
         <version.dependency.spring-boot>3.5.7</version.dependency.spring-boot>
@@ -71,6 +72,25 @@
                     <execution>
                         <goals>
                             <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${version.plugin.jacoco-maven-plugin}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>
