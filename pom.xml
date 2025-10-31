@@ -28,6 +28,7 @@
         <version.dependency.junit-jupiter>6.0.0</version.dependency.junit-jupiter>
         <version.dependency.mockito-junit-jupiter>5.20.0</version.dependency.mockito-junit-jupiter>
 
+        <sonar.organization>fehuworks</sonar.organization>
     </properties>
     <build>
         <plugins>

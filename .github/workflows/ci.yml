@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
 
@@ -27,17 +27,25 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: SonarQube Scan
+      - name: Cache SonarQube packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn sonar:sonar \
-          -Dsonar.projectKey=DerPyro_dj-wishlist \
-          -Dsonar.host.url=https://sonarcloud.io/ \
-          -Dsonar.login=$SONAR_TOKEN
+        run: mvn -B package spring-boot:repackage verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=DerPyro_dj-wishlist
 
-
-      - name: Build with Maven
-        run: mvn package spring-boot:repackage -DskipTests
+      #- name: Build with Maven
+      # run: mvn package spring-boot:repackage -DskipTests
 
       - name: Build Docker Image
         run: |
