@@ -8,6 +8,21 @@ import org.junit.jupiter.api.Test;
 class WishTest {
 
   @Test
+  void equals_return_false_when_comparing_to_different_class() {
+    Wish sut = new Wish();
+    Object toCompare = new Object();
+    assertNotEquals(toCompare, sut, "Different classes lead not to inequality");
+    assertNotEquals(
+        toCompare.hashCode(), sut.hashCode(), "Different classes lead not to different hashCodes");
+  }
+
+  @Test
+  void equals_return_false_when_comparing_to_null() {
+    Wish sut = new Wish();
+    assertNotEquals(null, sut, "null comparison does not lead to inequality");
+  }
+
+  @Test
   void equals_return_true_when_id_is_equal() {
     Wish sut = new Wish();
     UUID sharedId = UUID.randomUUID();
@@ -22,6 +37,22 @@ class WishTest {
 
     assertEquals(toCompare, sut, "Equal Id does not lead to equal objects");
     assertEquals(toCompare.hashCode(), sut.hashCode(), "Equal Id does not lead to same hashCode");
+  }
+
+  @Test
+  void equals_return_false_when_id_is_different() {
+    Wish sut = new Wish();
+    sut.setId(UUID.randomUUID());
+    sut.setSongName("Trip to Valhalla");
+    sut.setArtist("Dr. Peacock");
+
+    Wish toCompare = new Wish();
+    toCompare.setId(UUID.randomUUID());
+    toCompare.setSongName("Trip to Valhalla");
+    toCompare.setArtist("Dr. Peacock");
+
+    assertNotEquals(toCompare, sut, "Unequal Id does lead to equal objects");
+    assertNotEquals(toCompare.hashCode(), sut.hashCode(), "Unequal Id does lead to same hashCode");
   }
 
   @Test
@@ -57,10 +88,12 @@ class WishTest {
     Wish sut = new Wish();
     String user = UUID.randomUUID().toString();
     sut.upvote(user);
-    assertTrue(sut.isUpvotedBy(user));
+    assertTrue(sut.isUpvotedBy(user), "User is not marked as upvoter");
+    assertFalse(sut.isDownvotedBy(user), "User is marked as downvoter");
 
     sut.upvote(user);
-    assertFalse(sut.isUpvotedBy(user));
+    assertFalse(sut.isUpvotedBy(user), "User is still marked as upvoter");
+    assertFalse(sut.isDownvotedBy(user), "User is marked as downvoter");
   }
 
   @Test
@@ -99,10 +132,12 @@ class WishTest {
     Wish sut = new Wish();
     String user = UUID.randomUUID().toString();
     sut.downvote(user);
-    assertTrue(sut.isDownvotedBy(user));
+    assertTrue(sut.isDownvotedBy(user), "User is not marked as downvoter");
+    assertFalse(sut.isUpvotedBy(user), "User is marked as upvoter");
 
     sut.downvote(user);
-    assertFalse(sut.isDownvotedBy(user));
+    assertFalse(sut.isDownvotedBy(user), "User is still marked as downvoter");
+    assertFalse(sut.isUpvotedBy(user), "User is marked as upvoter");
   }
 
   @Test
