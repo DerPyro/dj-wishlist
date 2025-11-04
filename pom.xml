@@ -20,6 +20,7 @@
         <version.plugin.spotless-maven-plugin>2.46.1</version.plugin.spotless-maven-plugin>
         <version.plugin.jacoco-maven-plugin>0.8.14</version.plugin.jacoco-maven-plugin>
         <version.plugin.sonar-maven-plugin>5.2.0.4988</version.plugin.sonar-maven-plugin>
+        <version.plugin.pitest-maven-plugin>1.21.1</version.plugin.pitest-maven-plugin>
 
         <version.dependency.jackson-databind>3.0.1</version.dependency.jackson-databind>
         <version.dependency.spring-boot>3.5.7</version.dependency.spring-boot>
@@ -27,6 +28,7 @@
         <version.dependency.lombok>1.18.42</version.dependency.lombok>
         <version.dependency.junit-jupiter>6.0.0</version.dependency.junit-jupiter>
         <version.dependency.mockito-junit-jupiter>5.20.0</version.dependency.mockito-junit-jupiter>
+        <version.dependency.pitest-junit5-plugin>1.2.3</version.dependency.pitest-junit5-plugin>
 
         <sonar.organization>fehuworks</sonar.organization>
     </properties>
@@ -43,6 +45,21 @@
                 <version>${version.plugin.maven-resources-plugin}</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>${version.plugin.pitest-maven-plugin}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>${version.dependency.pitest-junit5-plugin}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <threads>2</threads>
                 </configuration>
             </plugin>
             <plugin>
