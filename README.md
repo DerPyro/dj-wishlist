@@ -1,24 +1,52 @@
-[![codecov](https://codecov.io/github/DerPyro/dj-wishlist/graph/badge.svg?token=126XEV9W9H)](https://codecov.io/github/DerPyro/dj-wishlist)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
-
 # dj-wishlist
 
 A program for DJs to easily manage music requests
 
+[![codecov](https://codecov.io/github/DerPyro/dj-wishlist/graph/badge.svg?token=126XEV9W9H)](https://codecov.io/github/DerPyro/dj-wishlist)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+[![Buy me a coffee](https://badgen.net/badge/icon/Buy%20me%20a%20coffee?icon=buymeacoffee&label)](https://buymeacoffee.com/derpyro)
+
 ## How to run
+
+### from code
+
+### from prebuilt Docker Image
+
+```bash
+docker pull fehuworks/dj-wishlist
+docker run -p 8080:8080 fehuworks/dj-wishlist
+```
+
+```bash
+mvn clean spring-boot:run
+```
+
+or build and run with docker:
 
 ```bash
 mvn clean package spring-boot:repackage
-docker build -t fehuworks/dj-wishlist:0.0.2 .
-docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
+docker build -t fehuworks/dj-wishlist .
+docker run -p 8080:8080 fehuworks/dj-wishlist
 ```
 
-## How to push to Docker Hub
+## Changelog
 
-```bash
-docker login
-docker push fehuworks/dj-wishlist:0.0.2
-```
+### Version 0.0.2 - 2025-10-30 ![Work in Progress](https://img.shields.io/badge/work%20in%20progress-orange?logo=construction&logoColor=white)
+
+- Added Dockerfile for easy deployment
+- Improved admin interface
+- Fixed minor bugs
+- Updated dependencies
+- Improved documentation
+
+### [Version 0.0.1 - 2025-10-15](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.1) [![Get 0.0.1 on Dockerhub](https://badgen.net/badge/icon/Image?icon=docker&label)](https://hub.docker.com/layers/fehuworks/dj-wishlist/0.0.1/images/sha256-90fb28e4b871bf9daf44b45caa7cc877fa92bfe56dc6d92b7c8eacf68549d96f) [![Get 0.0.1 on Github](https://badgen.net/badge/icon/Code?color=orange&icon=github&label)](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.1)
+
+[![](https://badgen.net/badge/icon/Built%20on%20Java%2017?color=red&icon=java&label)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+
+- Initial release
+- Basic functionality to add and vote for song wishes
+- Simple web interface
+- Rudimentary rights management system
 
 ## Get it from Dockerhub
 
