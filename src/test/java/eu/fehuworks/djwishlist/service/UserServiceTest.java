@@ -89,6 +89,30 @@ class UserServiceTest {
   }
 
   @Test
+  void registerAdmin_does_change_existing_users_isAdmin_to_true() {
+    String expectedSessionId = UUID.randomUUID().toString();
+    String name = UUID.randomUUID().toString();
+
+    sut.add(expectedSessionId, name);
+    sut.registerAdmin(expectedSessionId, name);
+
+    User result = sut.getUser(expectedSessionId);
+    assertEquals(name, result.getName(), "name is not correct after registerAdmin");
+    assertEquals(
+        expectedSessionId, result.getSessionId(), "session id is not correct after registerAdmin");
+    assertTrue(result.isAdmin(), "user is not admin - but should be admin");
+  }
+
+  @Test
+  void after_registerAdmin_isUserKnown_returns_true_for_admin_user() {
+    String expectedSessionId = UUID.randomUUID().toString();
+
+    sut.registerAdmin(expectedSessionId, UUID.randomUUID().toString());
+
+    assertTrue(sut.isUserKnown(expectedSessionId), "admin user is not known - but should be known");
+  }
+
+  @Test
   void when_user_is_already_admin_add_does_not_set_isAdmin_false() {
     String expectedSessionId = UUID.randomUUID().toString();
     String name = UUID.randomUUID().toString();

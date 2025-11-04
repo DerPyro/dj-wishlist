@@ -1,6 +1,7 @@
 package eu.fehuworks.djwishlist.service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 import eu.fehuworks.djwishlist.model.User;
 import eu.fehuworks.djwishlist.model.Vote;
@@ -121,5 +122,152 @@ class WishlistServiceTest {
         sut.removeWish(UUID.randomUUID(), createUser(UserType.NORMAL)),
         "Did return true even without any removed wish");
     assertEquals(1, sut.getWishes().size(), "Did not keep wish");
+  }
+
+  @Test
+  void removeWish_keeps_other_wishes_when_removing_wish_with_given_id() {
+    Wish wish1 = createWish();
+    Wish wish2 = createWish();
+    sut.addWish(wish1);
+    sut.addWish(wish2);
+
+    boolean result = sut.removeWish(wish1.getId(), createUser(UserType.ADMIN));
+
+    assertTrue(result, "Did not return true when removing existing wish");
+    assertFalse(sut.getWishes().containsKey(wish1), "Wish1 was not removed");
+    assertTrue(sut.getWishes().containsKey(wish2), "Wish2 was removed");
+  }
+
+  @Test
+  void upvote_adds_upvote_to_wish_with_given_id() {
+    Wish wish = createWish();
+    sut.addWish(wish);
+
+    boolean result = sut.upvote(wish.getId(), "upvoter1");
+    assertTrue(result, "Did not return true when upvoting existing wish");
+    Vote vote = sut.getWishes().get(wish);
+    assertEquals(1, vote.getUpvotes(), "Upvotes count is not 1 after one upvote");
+    assertEquals(0, vote.getDownvotes(), "Downvotes count is not 0 after one upvote");
+    assertEquals(1, vote.getTotalVotes(), "Total votes count is not 1 after one upvote");
+  }
+
+  @Test
+  void upvote_returns_false_when_no_wish_with_given_id_is_found() {
+    sut.addWish(createWish());
+
+    boolean result = sut.upvote(UUID.randomUUID(), "upvoter1");
+
+    assertFalse(result, "Did return true even without any upvoted wish");
+  }
+
+  @Test
+  void upvote_does_not_upvote_wish_twice_by_same_user() {
+    Wish wish = createWish();
+    sut.addWish(wish);
+    sut.upvote(wish.getId(), "upvoter1");
+
+    boolean result = sut.upvote(wish.getId(), "upvoter1");
+
+    assertTrue(result, "Did not return true when upvoting existing wish");
+    Vote vote = sut.getWishes().get(wish);
+    assertEquals(0, vote.getUpvotes(), "Upvotes count is not 0 after two upvotes by same user");
+    assertEquals(0, vote.getDownvotes(), "Downvotes count is not 0 after two upvotes by same user");
+    assertEquals(
+        0, vote.getTotalVotes(), "Total votes count is not 0 after two upvotes by same user");
+  }
+
+  @Test
+  void upvote_can_increase_total_votes_above_one() {
+    Wish wish = createWish();
+    sut.addWish(wish);
+
+    sut.upvote(wish.getId(), "upvoter1");
+    sut.upvote(wish.getId(), "upvoter2");
+
+    Vote result = sut.getWishes().get(wish);
+    assertEquals(
+        2, result.getUpvotes(), "Upvotes count is not 2 after two upvotes by different users");
+    assertEquals(
+        0, result.getDownvotes(), "Downvotes count is not 0 after two upvotes by different users");
+    assertEquals(
+        2,
+        result.getTotalVotes(),
+        "Total votes count is not 2 after two upvotes by different users");
+  }
+
+  @Test
+  void downvote_adds_downvote_to_wish_with_given_id() {
+    Wish wish = createWish();
+    sut.addWish(wish);
+
+    boolean result = sut.downvote(wish.getId(), "downvoter1");
+    assertTrue(result, "Did not return true when downvoting existing wish");
+    Vote vote = sut.getWishes().get(wish);
+    assertEquals(1, vote.getDownvotes(), "Downvotes count is not 1 after one downvote");
+    assertEquals(0, vote.getUpvotes(), "Upvotes count is not 0 after one downvote");
+    assertEquals(-1, vote.getTotalVotes(), "Total votes count is not -1 after one downvote");
+  }
+
+  @Test
+  void downvote_returns_false_when_no_wish_with_given_id_is_found() {
+    sut.addWish(createWish());
+
+    boolean result = sut.downvote(UUID.randomUUID(), "downvoter1");
+
+    assertFalse(result, "Did return true even without any downvoted wish");
+  }
+
+  @Test
+  void downvote_does_not_downvote_wish_twice_by_same_user() {
+    Wish wish = createWish();
+    sut.addWish(wish);
+    sut.downvote(wish.getId(), "downvoter1");
+
+    boolean result = sut.downvote(wish.getId(), "downvoter1");
+
+    assertTrue(result, "Did not return true when downvoting existing wish");
+    Vote vote = sut.getWishes().get(wish);
+    assertEquals(
+        0, vote.getDownvotes(), "Downvotes count is not 0 after two downvotes by same user");
+    assertEquals(0, vote.getUpvotes(), "Upvotes count is not 0 after two downvotes by same user");
+    assertEquals(
+        0, vote.getTotalVotes(), "Total votes count is not 0 after two downvotes by same user");
+  }
+
+  @Test
+  void downvote_can_decrease_total_votes_below_one() {
+    Wish wish = createWish();
+    sut.addWish(wish);
+
+    sut.downvote(wish.getId(), "downvoter1");
+    sut.downvote(wish.getId(), "downvoter2");
+
+    Vote result = sut.getWishes().get(wish);
+    assertEquals(
+        2,
+        result.getDownvotes(),
+        "Downvotes count is not 2 after two downvotes by different users");
+    assertEquals(
+        0, result.getUpvotes(), "Upvotes count is not 0 after two downvotes by different users");
+    assertEquals(
+        -2,
+        result.getTotalVotes(),
+        "Total votes count is not -2 after two downvotes by different users");
+  }
+
+  @Test
+  void updateUsernames_updates_issuer_names_based_on_user_service() {
+    String expected = "NewUsername";
+    User user = createUser(UserType.NORMAL);
+    when(userService.getUser(user.getSessionId()))
+        .thenReturn(new User(user.getSessionId(), expected, false));
+
+    Wish wish = createWish(user);
+    sut.addWish(wish);
+    assertEquals(user.getName(), wish.getIssuer(), "Issuer name was not updated");
+
+    sut.updateUsernames(user.getSessionId());
+
+    assertEquals(expected, wish.getIssuer(), "Issuer name was not updated");
   }
 }

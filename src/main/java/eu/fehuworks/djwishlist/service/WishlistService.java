@@ -20,9 +20,8 @@ public class WishlistService {
 
   @Getter private final Map<Wish, Vote> wishes = new ConcurrentHashMap<>();
 
-  public boolean addWish(Wish wish) {
+  public void addWish(Wish wish) {
     wishes.put(wish, new Vote(0, 0));
-    return true;
   }
 
   public void updateUsernames(String sessionId) {
@@ -50,7 +49,7 @@ public class WishlistService {
 
   public boolean upvote(UUID id, String upvoter) {
     var wishEntry =
-        wishes.entrySet().stream().filter(w -> w.getKey().getId().equals(id)).findFirst();
+        wishes.entrySet().stream().filter(entry -> entry.getKey().getId().equals(id)).findFirst();
     if (wishEntry.isPresent()) {
       Wish wish = wishEntry.get().getKey();
       wish.upvote(upvoter);
