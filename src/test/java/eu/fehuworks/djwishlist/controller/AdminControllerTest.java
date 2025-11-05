@@ -29,7 +29,7 @@ class AdminControllerTest {
   @Autowired private MockMvc mockMvc;
 
   @Test
-  void showAdminPage_return_admin() throws Exception {
+  void showAdminPage_return_admin_view() throws Exception {
     mockMvc
         .perform(get("/admin"))
         .andExpect(status().isOk())
