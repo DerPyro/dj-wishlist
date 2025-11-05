@@ -1,82 +1,86 @@
 package eu.fehuworks.djwishlist.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import eu.fehuworks.djwishlist.model.AdminUser;
 import eu.fehuworks.djwishlist.service.AdminService;
-import jakarta.servlet.http.HttpSession;
 import java.util.UUID;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
 
-@ExtendWith(MockitoExtension.class)
+@WebMvcTest(AdminController.class)
 class AdminControllerTest {
 
-  @Mock private AdminService adminService;
-  @Mock private Model model;
-  @Mock private HttpSession httpSession;
+  @MockitoBean private AdminService adminService;
+  @Autowired private MockMvc mockMvc;
 
-  private AdminController sut;
-
-  @BeforeEach
-  void setUp() {
-    sut = new AdminController(adminService);
+  @Test
+  void showAdminPage_return_admin() throws Exception {
+    mockMvc
+        .perform(get("/admin"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("admin"))
+        .andExpect(
+            model()
+                .attribute(
+                    "adminUser",
+                    allOf(
+                        hasProperty("username", nullValue()),
+                        hasProperty("password", nullValue()))));
   }
 
   @Test
-  void showAdminPage_return_admin() {
-    assertEquals("admin", sut.showAdminPage(model));
-  }
-
-  @Test
-  void showAdminPage_adds_new_adminUser_to_model() {
-    sut.showAdminPage(model);
-
-    verify(model).addAttribute("adminUser", new AdminUser());
-  }
-
-  @Test
-  void handleAdminLogin_calls_adminService_authenticate_with_given_adminUser_and_sessionId() {
+  void handleAdminLogin_calls_adminService_authenticate_with_given_adminUser_and_sessionId()
+      throws Exception {
     AdminUser adminUser = createAdminUser();
-    String expectedSessionId = UUID.randomUUID().toString();
-    when(httpSession.getId()).thenReturn(expectedSessionId);
-
-    sut.handleAdminLogin(adminUser, httpSession);
+    MockHttpSession session = createHttpSession();
+    mockMvc
+        .perform(post("/admin").flashAttr("adminUser", adminUser).session(session))
+        .andExpect(status().is3xxRedirection());
 
     verify(adminService)
-        .authenticate(adminUser.getUsername(), adminUser.getPassword(), expectedSessionId);
+        .authenticate(adminUser.getUsername(), adminUser.getPassword(), session.getId());
   }
 
   private static AdminUser createAdminUser() {
     AdminUser adminUser = new AdminUser();
-    adminUser.setUsername(UUID.randomUUID().toString());
-    adminUser.setPassword(UUID.randomUUID().toString());
+    adminUser.setUsername("username-" + UUID.randomUUID());
+    adminUser.setPassword("password-" + UUID.randomUUID());
     return adminUser;
+  }
+
+  private static MockHttpSession createHttpSession() {
+    return new MockHttpSession(null, "sessionId-" + UUID.randomUUID());
   }
 
   @ParameterizedTest
   @MethodSource("handleAdminLogin_test_data")
-  void handleAdminLogin_return_is_conditional_from_adminService_authenticate_call(
-      boolean adminServiceResult, String expectedResult) {
+  void handleAdminLogin_redirection_is_conditional_from_adminService_authenticate_call(
+      boolean adminServiceResult, String expectedRedirectedUrl) throws Exception {
     when(adminService.authenticate(any(), any(), any())).thenReturn(adminServiceResult);
 
-    String result = sut.handleAdminLogin(createAdminUser(), httpSession);
-
-    assertEquals(expectedResult, result);
+    mockMvc
+        .perform(
+            post("/admin").flashAttr("adminUser", createAdminUser()).session(createHttpSession()))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(redirectedUrl(expectedRedirectedUrl));
   }
 
   private static Stream<Arguments> handleAdminLogin_test_data() {
-    return Stream.of(Arguments.of(true, "redirect:/"), Arguments.of(false, "redirect:/admin"));
+    return Stream.of(Arguments.of(true, "/"), Arguments.of(false, "/admin"));
   }
 }
