@@ -31,7 +31,7 @@ docker run -p 8080:8080 fehuworks/dj-wishlist
 
 ## Changelog
 
-### Version 0.0.2 ![Work in Progress](https://img.shields.io/badge/work%20in%20progress-orange?logo=construction&logoColor=white)
+### Version 0.0.2 [![Work in Progress](https://img.shields.io/badge/work%20in%20progress-orange?logo=construction&logoColor=white)](https://github.com/DerPyro/dj-wishlist/tree/main)
 
 - Added Dockerfile for easy deployment
 - Improved admin interface
@@ -104,6 +104,9 @@ Just look at the logs:
 ...
 ```
 
+<details>
+<summary>See more details</summary>
+
 ## Code Coverage in Detail
 
 [![codecov](https://codecov.io/github/DerPyro/dj-wishlist/graphs/sunburst.svg?token=126XEV9W9H)](https://codecov.io/github/DerPyro/dj-wishlist)
@@ -120,3 +123,6 @@ Just look at the logs:
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+
+</details>
+
