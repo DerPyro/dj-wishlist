@@ -10,13 +10,6 @@ A program for DJs to easily manage music requests
 
 ### from code
 
-### from prebuilt Docker Image
-
-```bash
-docker pull fehuworks/dj-wishlist
-docker run -p 8080:8080 fehuworks/dj-wishlist
-```
-
 ```bash
 mvn clean spring-boot:run
 ```
@@ -26,6 +19,13 @@ or build and run with docker:
 ```bash
 mvn clean package spring-boot:repackage
 docker build -t fehuworks/dj-wishlist .
+docker run -p 8080:8080 fehuworks/dj-wishlist
+```
+
+### from prebuilt Docker Image
+
+```bash
+docker pull fehuworks/dj-wishlist
 docker run -p 8080:8080 fehuworks/dj-wishlist
 ```
 
@@ -47,10 +47,6 @@ docker run -p 8080:8080 fehuworks/dj-wishlist
 - Basic functionality to add and vote for song wishes
 - Simple web interface
 - Rudimentary rights management system
-
-## Get it from Dockerhub
-
-You can get it [here](https://hub.docker.com/r/fehuworks/dj-wishlist)
 
 ## How to use it
 
