@@ -42,6 +42,7 @@ docker run -p 8080:8080 fehuworks/dj-wishlist
 - Updated dependencies
 - Improved documentation
 - Updated Java
+- Enhanced mobile experience
 
 ### [Version 0.0.1 - 2025-10-29](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.1) [![Get 0.0.1 on Dockerhub](https://badgen.net/badge/icon/Image?icon=docker&label)](https://hub.docker.com/layers/fehuworks/dj-wishlist/0.0.1/images/sha256-90fb28e4b871bf9daf44b45caa7cc877fa92bfe56dc6d92b7c8eacf68549d96f) [![Get 0.0.1 on Github](https://badgen.net/badge/icon/Code?color=orange&icon=github&label)](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.1)
 

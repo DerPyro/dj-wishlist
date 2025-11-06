@@ -1,80 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title th:utext="#{admin.title}"></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          crossorigin="anonymous" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
-        /* ...bestehende Styles... */
-        @media (max-width: 480px) {
-            .admin-container {
-                padding: 1.2rem 0.5rem;
-                max-width: 98vw;
-            }
-
-            .form-control,
-            .btn-primary {
-                font-size: 1rem;
-            }
-        }
-    </style>
-    <style>
-        body {
-            background: linear-gradient(135deg, #232526 0%, #414345 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
+      /* ...bestehende Styles... */
+      @media (max-width: 480px) {
         .admin-container {
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-            padding: 2.5rem 2rem;
-            width: 100%;
-            max-width: 350px;
+          padding: 1.2rem 0.5rem;
+          max-width: 98vw;
         }
 
-        .form-label {
-            font-weight: 500;
-        }
-
-        .form-control {
-            border-radius: 8px;
-            margin-bottom: 1.2rem;
-        }
-
+        .form-control,
         .btn-primary {
-            width: 100%;
-            border-radius: 8px;
-            font-weight: 600;
-            padding: 0.75rem;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            border: none;
+          font-size: 1rem;
         }
+      }
     </style>
-</head>
+    <style>
+      body {
+        background: linear-gradient(135deg, #232526 0%, #414345 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-<body>
-<div class="admin-container">
-    <h2 class="mb-4 text-center" th:utext="#{admin.title}"></h2>
-    <form method="post" th:action="@{/admin}" th:object="${adminUser}">
+      .admin-container {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+        padding: 2.5rem 2rem;
+        width: 100%;
+        max-width: 350px;
+      }
+
+      .form-label {
+        font-weight: 500;
+      }
+
+      .form-control {
+        border-radius: 8px;
+        margin-bottom: 1.2rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 0.75rem;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        border: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="admin-container">
+      <h2 class="mb-4 text-center" th:utext="#{admin.title}"></h2>
+      <form method="post" th:action="@{/admin}" th:object="${adminUser}">
         <div class="mb-3">
-            <label for="username" class="form-label" th:text="#{admin.name.label}">Username</label>
-            <input type="text" id="username" th:field="*{username}" class="form-control" required>
+          <label for="username" class="form-label" th:text="#{admin.name.label}"
+            >Username</label
+          >
+          <input
+            type="text"
+            id="username"
+            th:field="*{username}"
+            class="form-control"
+            required
+          />
         </div>
         <div class="mb-4">
-            <label for="password" class="form-label" th:text="#{admin.password.label}">Password</label>
-            <input type="password" id="password" th:field="*{password}" class="form-control" required>
+          <label
+            for="password"
+            class="form-label"
+            th:text="#{admin.password.label}"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            th:field="*{password}"
+            class="form-control"
+            required
+          />
         </div>
-        <button type="submit" class="btn btn-primary" th:text="#{admin.button}">send</button>
-    </form>
-</div>
-</body>
-
+        <button type="submit" class="btn btn-primary" th:text="#{admin.button}">
+          send
+        </button>
+      </form>
+    </div>
+  </body>
 </html>
