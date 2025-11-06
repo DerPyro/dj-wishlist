@@ -33,15 +33,20 @@ docker run -p 8080:8080 fehuworks/dj-wishlist
 
 ### Version 0.0.2 [![Work in Progress](https://img.shields.io/badge/work%20in%20progress-orange?logo=construction&logoColor=white)](https://github.com/DerPyro/dj-wishlist/tree/main)
 
+[![](https://badgen.net/badge/icon/Built%20on%20Java%2021?color=red&icon=java&label)](https://www.oracle.com/java/technologies/downloads/#java21)
+[![](https://badgen.net/badge/icon/Built%20with%20Maven%203.9.11?color=purple&icon=maven&label)](https://maven.apache.org/docs/3.9.11/release-notes.html)
+
 - Added Dockerfile for easy deployment
 - Improved admin interface
 - Fixed minor bugs
 - Updated dependencies
 - Improved documentation
+- Updated Java
 
 ### [Version 0.0.1 - 2025-10-29](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.1) [![Get 0.0.1 on Dockerhub](https://badgen.net/badge/icon/Image?icon=docker&label)](https://hub.docker.com/layers/fehuworks/dj-wishlist/0.0.1/images/sha256-90fb28e4b871bf9daf44b45caa7cc877fa92bfe56dc6d92b7c8eacf68549d96f) [![Get 0.0.1 on Github](https://badgen.net/badge/icon/Code?color=orange&icon=github&label)](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.1)
 
-[![](https://badgen.net/badge/icon/Built%20on%20Java%2017?color=red&icon=java&label)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+[![](https://badgen.net/badge/icon/Built%20on%20Java%2017?color=red&icon=java&label)](https://www.oracle.com/java/technologies/downloads/#java17)
+[![](https://badgen.net/badge/icon/Built%20with%20Maven%203.9.11?color=purple&icon=maven&label)](https://maven.apache.org/docs/3.9.11/release-notes.html)
 
 - Initial release
 - Basic functionality to add and vote for song wishes
