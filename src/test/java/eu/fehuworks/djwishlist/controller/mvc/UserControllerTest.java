@@ -1,4 +1,4 @@
-package eu.fehuworks.djwishlist.controller;
+package eu.fehuworks.djwishlist.controller.mvc;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;

@@ -1,6 +1,6 @@
-package eu.fehuworks.djwishlist.controller;
+package eu.fehuworks.djwishlist.controller.mvc;
 
-import static eu.fehuworks.djwishlist.controller.AdminController.PATH;
+import static eu.fehuworks.djwishlist.controller.mvc.AdminController.PATH;
 
 import eu.fehuworks.djwishlist.model.AdminUser;
 import eu.fehuworks.djwishlist.service.AdminService;

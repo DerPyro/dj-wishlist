@@ -1,4 +1,4 @@
-package eu.fehuworks.djwishlist.controller;
+package eu.fehuworks.djwishlist.controller.mvc;
 
 public abstract class AbstractMvcController {
 
