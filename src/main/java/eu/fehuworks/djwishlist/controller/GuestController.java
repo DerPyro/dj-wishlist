@@ -54,13 +54,11 @@ public class GuestController extends AbstractMvcController {
                     Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     model.addAttribute("wishlist", wishlist);
     Wish wish = new Wish();
-    if (userService.isUserKnown(session.getId())) {
-      wish.setIssuer(userService.getUser(session.getId()).getName());
-    }
+    wish.setIssuer(user.getName());
     model.addAttribute("newWish", wish);
     model.addAttribute("sessionId", session.getId());
     model.addAttribute("user", user);
-    model.addAttribute("isAdmin", userService.getUser(session.getId()).isAdmin());
+    model.addAttribute("isAdmin", user.isAdmin());
     return "start";
   }
 
