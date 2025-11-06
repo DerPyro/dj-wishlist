@@ -11,8 +11,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #232526 0%, #414345 100%);
-  min-height: 100vh;
+  display: block !important;
 }
 
 .main-title {
@@ -82,6 +81,11 @@ body {
   font-weight: 600;
   padding: 0.5rem 0;
 }
+
+.badge {
+  color: white;
+}
+
 .badge.vote-pos {
   background-color: #27ae60;
 } /* grün */
@@ -91,3 +95,220 @@ body {
 .badge.vote-zero {
   background-color: #6c757d;
 } /* grau */
+
+/* Link wie Text, aber als klickbares Element */
+.link-as-text {
+  display: inline-block; /* erlaubt Padding/Border ohne Zeilenumbruch */
+  color: var(--text); /* passt zum dunklen Theme */
+  text-decoration: none; /* kein Unterstrich */
+  background: transparent;
+  padding: 0.15rem 0.4rem; /* kleines Klickziel */
+  border-radius: 6px;
+  border: 1px solid transparent; /* Standard: unsichtbar */
+  font-weight: 600;
+  transition: background 0.12s, border-color 0.12s, color 0.12s, transform 0.08s;
+}
+
+/* optional: dezente sichtbare Border (aktivierbar durch zusätzliche Klasse) */
+.link-as-text.outlined {
+  border-color: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.005)
+  );
+}
+
+/* Hover / Focus */
+.link-as-text:hover,
+.link-as-text:focus {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+  text-decoration: none;
+  outline: none;
+}
+
+/* Optional: kleine Icon-Unterstützung innerhalb des Links */
+.link-as-text .fa {
+  margin-left: 0.35rem;
+  opacity: 0.95;
+}
+
+/* Responsiv: zentriert den Link, wenn er eigene Zeile hat */
+.text-center .link-as-text {
+  display: inline-block;
+}
+
+/* Container fixiert unten */
+.bottom-links {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center; /* zentriert die Gruppe; Einzelpositionierung per child */
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  pointer-events: none; /* verhindert Klicks auf leere Bereiche */
+  z-index: 1050; /* über Bootstrap-Modalen */
+}
+
+/* Innerhalb: erlauben Klicks nur auf Elemente */
+.bottom-links > * {
+  pointer-events: auto;
+}
+
+/* Layout: hint links, link rechts (mit Platz zwischen) */
+.bottom-links .hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  flex: 1 1 auto;
+  text-align: left;
+  align-self: center;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Link wie Text (klickbar) */
+a.link-as-text {
+  display: inline-block;
+  color: var(--text) !important;
+  text-decoration: none !important;
+  background: transparent;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  align-self: center;
+  flex: 0 0 auto;
+}
+
+/* optionale dezente Umrandung */
+a.link-as-text.outlined {
+  border-color: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.005)
+  );
+}
+
+/* Hover / Focus */
+a.link-as-text:hover,
+a.link-as-text:focus {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-1px);
+  text-decoration: none !important;
+  outline: none;
+}
+
+/* Auf sehr kleinen Bildschirmen: vertikal stapeln, padding reduzieren */
+@media (max-width: 540px) {
+  .bottom-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+    padding: 0.5rem;
+  }
+  .bottom-links .hint {
+    text-align: center;
+    max-width: 100%;
+    white-space: normal;
+  }
+  a.link-as-text {
+    align-self: center;
+  }
+}
+
+/* Fixiert unten, vertikal gestapelt */
+.bottom-links-vertical {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 1rem;
+  z-index: 1050;
+  pointer-events: none;
+}
+
+/* Erlaubt Klicks auf Inhalte */
+.bottom-links-vertical > * {
+  pointer-events: auto;
+}
+
+/* Hint-Text */
+.bottom-links-vertical .hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: center;
+  max-width: 95%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+/* Link wie Text (klickbar) */
+a.link-as-text {
+  display: inline-block;
+  color: var(--text) !important;
+  text-decoration: none !important;
+  background: transparent;
+  padding: 0.25rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+/* Dezente Umrandung */
+a.link-as-text.outlined {
+  border-color: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.005)
+  );
+}
+
+/* Hover / Focus */
+a.link-as-text:hover,
+a.link-as-text:focus {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  transform: translateY(-1px);
+  text-decoration: none !important;
+  outline: none;
+}
+
+/* Platz für die Leiste: verhindert Überdecken von Inhalten */
+body {
+  padding-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  /* auf größeren Bildschirmen etwas weniger Platzbedarf */
+  body {
+    padding-bottom: 3rem;
+  }
+}
+
+/* Standard: sichtbar */
+.show-desktop-only {
+  display: inline-block !important;
+}
+
+/* Auf mobilen Geräten (max-width: 767px) ausblenden */
+@media (max-width: 767px) {
+  .show-desktop-only {
+    display: none !important;
+  }
+}

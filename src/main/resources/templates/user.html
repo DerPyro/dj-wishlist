@@ -9,61 +9,12 @@
       crossorigin="anonymous"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <style>
-      /* ...bestehende Styles... */
-      @media (max-width: 480px) {
-        .admin-container {
-          padding: 1.2rem 0.5rem;
-          max-width: 98vw;
-        }
-
-        .form-control,
-        .btn-primary {
-          font-size: 1rem;
-        }
-      }
-    </style>
-    <style>
-      body {
-        background: linear-gradient(135deg, #232526 0%, #414345 100%);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .admin-container {
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
-        padding: 2.5rem 2rem;
-        width: 100%;
-        max-width: 350px;
-      }
-
-      .form-label {
-        font-weight: 500;
-      }
-
-      .form-control {
-        border-radius: 8px;
-        margin-bottom: 1.2rem;
-      }
-
-      .btn-primary {
-        width: 100%;
-        border-radius: 8px;
-        font-weight: 600;
-        padding: 0.75rem;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        border: none;
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/global.css}" />
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/css/user.css}" />-->
   </head>
 
   <body>
-    <div class="admin-container">
+    <div class="input-container">
       <h2 class="mb-4 text-center" th:utext="#{user.title}"></h2>
       <form method="post" th:action="@{/user}" th:object="${user}">
         <div class="mb-3">

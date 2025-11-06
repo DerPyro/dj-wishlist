@@ -1,0 +1,299 @@
+:root {
+  --bg: #0f1720;
+  --bg-2: #12151a;
+  --panel: #1b2228;
+  --accent: #2dd4bf;
+  --success: #22c55e;
+  --warn: #f59e0b;
+  --danger: #ef4444;
+  --text: #e6eef1;
+  --muted: #9aa6ad;
+  --divider: rgba(255, 255, 255, 0.06);
+  --badge-neutral: #334155;
+  --radius: 8px;
+  --shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+  --glass: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+}
+
+/* Base */
+html,
+body {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  line-height: 1.45;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+/* Page title */
+.main-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+/* Tables */
+.table-dark {
+  background: linear-gradient(180deg, var(--bg-2), var(--panel));
+  color: var(--text);
+  border-radius: calc(var(--radius) + 2px);
+  overflow: hidden;
+  border: 1px solid var(--divider);
+  box-shadow: var(--shadow);
+}
+.table-dark th,
+.table-dark td {
+  border-color: var(--divider);
+  vertical-align: middle;
+}
+.table-dark thead th {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.table-dark tbody tr:hover {
+  background: rgba(45, 212, 191, 0.03);
+}
+
+/* Cards (mobile) */
+.card.text-bg-dark {
+  background: var(--panel);
+  border: 1px solid var(--divider);
+  color: var(--text);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.card .card-title {
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.card .card-subtitle {
+  color: var(--muted);
+}
+
+/* Buttons (font-awesome icons use .btn) */
+.btn {
+  color: var(--text);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn.white {
+  color: var(--text);
+  opacity: 0.9;
+}
+.btn.green {
+  color: var(--success) !important;
+}
+.btn.red {
+  color: var(--danger) !important;
+}
+
+/* Primary accent buttons */
+.btn-success,
+.btn-success:focus,
+.btn-success:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(45, 212, 191, 0.14),
+    rgba(45, 212, 191, 0.08)
+  );
+  color: #041014;
+  border: 1px solid rgba(45, 212, 191, 0.18);
+  box-shadow: 0 6px 20px rgba(45, 212, 191, 0.06);
+}
+
+/* Badges for vote */
+.badge {
+  background: var(--badge-neutral);
+  color: var(--text);
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  font-weight: 600;
+  min-width: 2.2rem;
+  text-align: center;
+}
+.vote-pos {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 197, 94, 0.12),
+    rgba(45, 212, 191, 0.08)
+  );
+  color: var(--success);
+  border: 1px solid rgba(34, 197, 94, 0.12);
+}
+.vote-neg {
+  background: linear-gradient(
+    90deg,
+    rgba(239, 68, 68, 0.08),
+    rgba(0, 0, 0, 0.02)
+  );
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.06);
+}
+.vote-zero {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--muted);
+  border: 1px solid var(--divider);
+}
+
+/* Modal */
+.modal-content {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid var(--divider);
+  color: var(--text);
+}
+.modal-header {
+  border-bottom: 1px solid var(--divider);
+}
+.modal-title {
+  color: var(--text);
+}
+.btn-close-white {
+  filter: invert(1) brightness(1.05) sepia(0.05);
+}
+
+/* Forms */
+.form-control {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--divider);
+  color: var(--text);
+  border-radius: 6px;
+  box-shadow: none;
+}
+.form-control:focus {
+  outline: none;
+  border-color: rgba(45, 212, 191, 0.28);
+  box-shadow: 0 6px 20px rgba(45, 212, 191, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Add button in modal */
+.add-btn {
+  background: linear-gradient(90deg, var(--accent), rgba(34, 197, 94, 0.85));
+  color: #041014;
+  border: none;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: 0 8px 26px rgba(45, 212, 191, 0.08);
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.add-btn i {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Small utility tweaks */
+.text-muted {
+  color: var(--muted) !important;
+}
+a.btn {
+  text-decoration: none;
+}
+.table-responsive {
+  padding: 0.5rem;
+}
+
+/* Responsive: reduce shadows on very small screens */
+@media (max-width: 420px) {
+  :root {
+    --shadow: 0 4px 10px rgba(2, 6, 23, 0.6);
+  }
+  .main-title {
+    font-size: 1.25rem;
+  }
+}
+
+/* Dunkles Input-Container Styling (ersetzt dein bisheriges) */
+.input-container {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid var(--divider);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 75%;
+  color: var(--text);
+}
+
+/* Überschrift im Container */
+.input-container .mb-4 {
+  color: var(--text);
+  margin-bottom: 1rem !important;
+  font-weight: 600;
+}
+
+/* Form-Labels */
+.input-container .form-label {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Inputs innerhalb des Containers */
+.input-container .form-control {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--divider);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+/* Fokuszustand */
+.input-container .form-control:focus {
+  border-color: rgba(45, 212, 191, 0.28);
+  box-shadow: 0 6px 20px rgba(45, 212, 191, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  outline: none;
+}
+
+/* Primary Button im Container (angepasst für dunkles Thema) */
+.btn-primary {
+  background: linear-gradient(90deg, var(--accent), rgba(34, 197, 94, 0.85));
+  border: none;
+  color: #041014;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: 0 8px 26px rgba(45, 212, 191, 0.08);
+  width: 100%;
+}
+
+/* Responsives Verhalten: weniger Padding auf sehr kleinen Bildschirmen */
+@media (max-width: 420px) {
+  .input-container {
+    padding: 1.5rem 1rem;
+  }
+}
