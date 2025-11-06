@@ -8,7 +8,6 @@ import eu.fehuworks.djwishlist.model.Wish;
 import eu.fehuworks.djwishlist.service.UserService;
 import eu.fehuworks.djwishlist.service.WishlistService;
 import jakarta.servlet.http.HttpSession;
-import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;

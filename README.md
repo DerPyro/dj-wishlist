@@ -82,13 +82,13 @@ If you are not happy with the default values you can adjust these value:
 Instead of running
 
 ```bash
-docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
+docker run -p 8080:8080 fehuworks/dj-wishlist
 ```
 
 you can simply add adjusted values as key-value pairs with the parameter **-e**:
 
 ```bash
-docker run -p 8080:8080 -e ADMIN_USERNAME='much' -e ADMIN_PASSWORD='secure' fehuworks/dj-wishlist:0.0.2
+docker run -p 8080:8080 -e ADMIN_USERNAME='much' -e ADMIN_PASSWORD='secure' fehuworks/dj-wishlist
 ```
 
 ### How do I know it worked?
