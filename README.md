@@ -18,15 +18,15 @@ or build and run with docker:
 
 ```bash
 mvn clean package spring-boot:repackage
-docker build -t fehuworks/dj-wishlist .
-docker run -p 8080:8080 fehuworks/dj-wishlist
+docker build -t fehuworks/dj-wishlist:0.0.2 .
+docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
 ```
 
 ### from prebuilt Docker Image
 
 ```bash
-docker pull fehuworks/dj-wishlist
-docker run -p 8080:8080 fehuworks/dj-wishlist
+docker pull fehuworks/dj-wishlist:0.0.2
+docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
 ```
 
 ## Changelog
@@ -88,13 +88,13 @@ If you are not happy with the default values you can adjust these value:
 Instead of running
 
 ```bash
-docker run -p 8080:8080 fehuworks/dj-wishlist
+docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
 ```
 
 you can simply add adjusted values as key-value pairs with the parameter **-e**:
 
 ```bash
-docker run -p 8080:8080 -e ADMIN_USERNAME='much' -e ADMIN_PASSWORD='secure' fehuworks/dj-wishlist
+docker run -p 8080:8080 -e ADMIN_USERNAME='much' -e ADMIN_PASSWORD='secure' fehuworks/dj-wishlist:0.0.2
 ```
 
 ### How do I know it worked?
