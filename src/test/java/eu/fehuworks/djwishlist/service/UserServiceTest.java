@@ -80,12 +80,25 @@ class UserServiceTest {
 
   @Test
   void registerAdmin_adds_user_with_isAdmin_true() {
-    String expectedSessionId = UUID.randomUUID().toString();
+    String expectedSessionId = "sessionId-" + UUID.randomUUID();
+    String expectedUsername = "username-" + UUID.randomUUID();
 
-    sut.registerAdmin(expectedSessionId, UUID.randomUUID().toString());
+    sut.registerAdmin(expectedSessionId, expectedUsername);
 
     User result = sut.getUser(expectedSessionId);
     assertTrue(result.isAdmin(), "user is not admin - but should be admin");
+    assertEquals(expectedUsername, result.getName(), "user does not have the correct name");
+  }
+
+  @Test
+  void register_admin_does_not_change_name_of_already_known_user() {
+    String expected = "oldUserName-" + UUID.randomUUID();
+    String sessionId = "sessionId-" + UUID.randomUUID();
+    sut.add(sessionId, expected);
+
+    sut.registerAdmin(sessionId, "a new name");
+
+    assertEquals(expected, sut.getUser(sessionId).getName(), "user does not have the correct name");
   }
 
   @Test

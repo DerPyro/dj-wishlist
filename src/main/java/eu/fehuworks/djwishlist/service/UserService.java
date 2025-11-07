@@ -19,7 +19,9 @@ public class UserService {
 
   public void registerAdmin(String sessionId, String name) {
     adminSessionId = sessionId;
-    add(sessionId, name);
+    if (!isUserKnown(sessionId)) {
+      add(sessionId, name);
+    }
   }
 
   public User getUser(String sessionId) {
