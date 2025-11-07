@@ -249,5 +249,15 @@
         ></a>
       </div>
     </div>
+    <script>
+      const modal = document.getElementById("addWishDialog");
+
+      new EventSource("/sse").onmessage = async function (event) {
+        // only reload page when not adding new wish
+        if (!modal?.classList.contains("show")) {
+          globalThis.location.reload(true);
+        }
+      };
+    </script>
   </body>
 </html>

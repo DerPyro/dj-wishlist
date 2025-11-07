@@ -17,12 +17,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class WishlistServiceTest {
 
   @Mock private UserService userService;
+  @Mock private SsePublisherService ssePublisherService;
 
   private WishlistService sut;
 
   @BeforeEach
   void setUp() {
-    sut = new WishlistService(userService);
+    sut = new WishlistService(userService, ssePublisherService);
   }
 
   @Test

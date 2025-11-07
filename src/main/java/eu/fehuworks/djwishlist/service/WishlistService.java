@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class WishlistService {
 
   private final UserService userService;
+  private final SsePublisherService ssePublisherService;
 
   @Getter private final Map<Wish, Vote> wishes = new ConcurrentHashMap<>();
 
@@ -32,6 +33,7 @@ public class WishlistService {
               String issuerName = userService.getUser(wish.getIssuerId()).getName();
               wish.setIssuer(issuerName);
             });
+    ssePublisherService.sendToAll("%s triggered an 'updateUsernames'-case".formatted(sessionId));
   }
 
   public boolean removeWish(UUID id, User user) {
@@ -41,6 +43,7 @@ public class WishlistService {
       Wish wish = wishEntry.get().getKey();
       if (user.isAdmin() || wish.canBeDeletedBy(user.getSessionId())) {
         wishes.remove(wish);
+        ssePublisherService.sendToAll("%s removed %s".formatted(user.getSessionId(), wish.getId()));
         return true;
       }
     }
@@ -54,6 +57,7 @@ public class WishlistService {
       Wish wish = wishEntry.get().getKey();
       wish.upvote(upvoter);
       wishes.put(wish, getVote(wish));
+      ssePublisherService.sendToAll("%s upvoted %s".formatted(upvoter, wish.getId()));
       return true;
     }
     return false;
@@ -78,6 +82,7 @@ public class WishlistService {
       Wish wish = wishEntry.get().getKey();
       wish.downvote(downvoter);
       wishes.put(wish, getVote(wish));
+      ssePublisherService.sendToAll("%s downvoted %s".formatted(downvoter, wish.getId()));
       return true;
     }
     return false;
