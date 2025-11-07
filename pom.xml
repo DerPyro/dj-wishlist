@@ -6,7 +6,7 @@
 
     <groupId>eu.fehuworks</groupId>
     <artifactId>dj-wishlist</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
