@@ -25,11 +25,13 @@ docker run -p 8080:8080 fehuworks/dj-wishlist
 ### from prebuilt Docker Image
 
 ```bash
-docker pull fehuworks/dj-wishlist:0.0.2
-docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
+docker pull fehuworks/dj-wishlist
+docker run -p 8080:8080 fehuworks/dj-wishlist
 ```
 
 ## Changelog
+
+### Version 0.0.3 [![Work in Progress](https://img.shields.io/badge/work%20in%20progress-orange?logo=construction&logoColor=white)](https://github.com/DerPyro/dj-wishlist/tree/main)
 
 ### [Version 0.0.2 - 2025-11-07](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.2) [![Get 0.0.2 on Dockerhub](https://badgen.net/badge/icon/Image?icon=docker&label)](https://hub.docker.com/layers/fehuworks/dj-wishlist/0.0.2/images/sha256-977b6980e5576fa4c0bd59ff06b7b732ed133141b8f1acfc40d9ac6fc0fe9b37) [![Get 0.0.2 on Github](https://badgen.net/badge/icon/Code?color=orange&icon=github&label)](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.2)
 
@@ -88,13 +90,13 @@ If you are not happy with the default values you can adjust these value:
 Instead of running
 
 ```bash
-docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
+docker run -p 8080:8080 fehuworks/dj-wishlist
 ```
 
 you can simply add adjusted values as key-value pairs with the parameter **-e**:
 
 ```bash
-docker run -p 8080:8080 -e ADMIN_USERNAME='much' -e ADMIN_PASSWORD='secure' fehuworks/dj-wishlist:0.0.2
+docker run -p 8080:8080 -e ADMIN_USERNAME='much' -e ADMIN_PASSWORD='secure' fehuworks/dj-wishlist
 ```
 
 ### How do I know it worked?
