@@ -23,6 +23,7 @@ public class WishlistService {
 
   public void addWish(Wish wish) {
     wishes.put(wish, new Vote(0, 0));
+    ssePublisherService.sendToAll("%s added %s".formatted(wish.getIssuerId(), wish.getId()));
   }
 
   public void updateUsernames(String sessionId) {

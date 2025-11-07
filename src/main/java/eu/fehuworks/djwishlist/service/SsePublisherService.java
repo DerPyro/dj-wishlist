@@ -12,10 +12,11 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 @RequiredArgsConstructor
 public class SsePublisherService {
 
+  private final SseEmitterFactory sseEmitterFactory;
   private final Map<String, SseEmitter> emitters = new ConcurrentHashMap<>();
 
   public SseEmitter createSseEmitter(String sessionId) {
-    SseEmitter sseEmitter = new SseEmitter(Long.MAX_VALUE);
+    SseEmitter sseEmitter = sseEmitterFactory.createSseEmitter();
     sseEmitter.onCompletion(
         () -> {
           log.info(
@@ -54,20 +55,18 @@ public class SsePublisherService {
     emitters.keySet().forEach(sessionId -> sendTo(sessionId, data));
   }
 
-  public boolean sendTo(String sessionId, Object data) {
+  public void sendTo(String sessionId, Object data) {
     SseEmitter sseEmitter = emitters.get(sessionId);
     if (sseEmitter == null) {
-      return false;
+      log.warn("No SSE-Emitter for SessionID '{}' found", sessionId);
     } else {
       try {
         sseEmitter.send(data);
         log.debug("Sent '{}' to SessionID '{}'", data, sessionId);
-        return true;
       } catch (Throwable e) {
         log.error(
             "Sending '{}' to SessionID '{}' raised an error: {}", data, sessionId, e.getMessage());
         log.trace(e.getMessage(), e);
-        return false;
       }
     }
   }

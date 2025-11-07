@@ -1,6 +1,7 @@
 package eu.fehuworks.djwishlist.service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import eu.fehuworks.djwishlist.model.User;
@@ -65,6 +66,14 @@ class WishlistServiceTest {
     assertEquals(0, result.getTotalVotes());
     assertEquals(0, result.getUpvotes());
     assertEquals(0, result.getDownvotes());
+  }
+
+  @Test
+  void add_calls_ssePublisherService_sendToAll() {
+    Wish wish = createWish();
+    sut.addWish(wish);
+
+    verify(ssePublisherService).sendToAll(wish.getIssuerId() + " added " + wish.getId());
   }
 
   @Test
@@ -140,6 +149,17 @@ class WishlistServiceTest {
   }
 
   @Test
+  void removeWish_calls_ssePublisherService_sendToAll() {
+    Wish wish = createWish();
+    User user = createUser(UserType.ADMIN);
+    sut.addWish(wish);
+
+    sut.removeWish(wish.getId(), user);
+
+    verify(ssePublisherService).sendToAll(user.getSessionId() + " removed " + wish.getId());
+  }
+
+  @Test
   void upvote_adds_upvote_to_wish_with_given_id() {
     Wish wish = createWish();
     sut.addWish(wish);
@@ -194,6 +214,17 @@ class WishlistServiceTest {
         2,
         result.getTotalVotes(),
         "Total votes count is not 2 after two upvotes by different users");
+  }
+
+  @Test
+  void upvote_calls_ssePublisherService_sendToAll() {
+    Wish wish = createWish();
+    User user = createUser(UserType.NORMAL);
+    sut.addWish(wish);
+
+    sut.upvote(wish.getId(), user.getSessionId());
+
+    verify(ssePublisherService).sendToAll(user.getSessionId() + " upvoted " + wish.getId());
   }
 
   @Test
@@ -257,6 +288,17 @@ class WishlistServiceTest {
   }
 
   @Test
+  void downvote_calls_ssePublisherService_sendToAll() {
+    Wish wish = createWish();
+    User user = createUser(UserType.NORMAL);
+    sut.addWish(wish);
+
+    sut.downvote(wish.getId(), user.getSessionId());
+
+    verify(ssePublisherService).sendToAll(user.getSessionId() + " downvoted " + wish.getId());
+  }
+
+  @Test
   void updateUsernames_updates_issuer_names_based_on_user_service() {
     String expected = "NewUsername";
     User user = createUser(UserType.NORMAL);
@@ -270,5 +312,13 @@ class WishlistServiceTest {
     sut.updateUsernames(user.getSessionId());
 
     assertEquals(expected, wish.getIssuer(), "Issuer name was not updated");
+  }
+
+  @Test
+  void updateUsernames_calls_ssePublisherService_sendToAll() {
+    String expected = UUID.randomUUID().toString();
+    sut.updateUsernames(expected);
+
+    verify(ssePublisherService).sendToAll(expected + " triggered an 'updateUsernames'-case");
   }
 }
