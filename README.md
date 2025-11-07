@@ -18,8 +18,8 @@ or build and run with docker:
 
 ```bash
 mvn clean package spring-boot:repackage
-docker build -t fehuworks/dj-wishlist:0.0.2 .
-docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
+docker build -t fehuworks/dj-wishlist .
+docker run -p 8080:8080 fehuworks/dj-wishlist
 ```
 
 ### from prebuilt Docker Image
@@ -31,7 +31,7 @@ docker run -p 8080:8080 fehuworks/dj-wishlist:0.0.2
 
 ## Changelog
 
-### [Version 0.0.2 - 2025-11-07](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.2) [![Get 0.0.2 on Dockerhub](https://badgen.net/badge/icon/Image?icon=docker&label)](https://hub.docker.com/layers/fehuworks/dj-wishlist/0.0.2/images/sha256-7e9752d2ac25944917b80f9bc511ea390e5c761c2967374bdbf574d328ec6fb4) [![Get 0.0.2 on Github](https://badgen.net/badge/icon/Code?color=orange&icon=github&label)](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.2)
+### [Version 0.0.2 - 2025-11-07](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.2) [![Get 0.0.2 on Dockerhub](https://badgen.net/badge/icon/Image?icon=docker&label)](https://hub.docker.com/layers/fehuworks/dj-wishlist/0.0.2/images/sha256-977b6980e5576fa4c0bd59ff06b7b732ed133141b8f1acfc40d9ac6fc0fe9b37) [![Get 0.0.2 on Github](https://badgen.net/badge/icon/Code?color=orange&icon=github&label)](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.2)
 
 [![](https://badgen.net/badge/icon/Built%20on%20Java%2021?color=red&icon=java&label)](https://www.oracle.com/java/technologies/downloads/#java21)
 [![](https://badgen.net/badge/icon/Built%20with%20Maven%203.9.11?color=purple&icon=maven&label)](https://maven.apache.org/docs/3.9.11/release-notes.html)
