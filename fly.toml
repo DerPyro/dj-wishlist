@@ -1,7 +1,7 @@
 app = "dj-wishlist"
 
 [build]
-    image = fehuworks/dj-wishlist:latest
+    image = "fehuworks/dj-wishlist:latest"
 
 [env]
     PORT = "8080"
