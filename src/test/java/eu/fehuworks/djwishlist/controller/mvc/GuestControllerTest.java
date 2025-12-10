@@ -15,6 +15,7 @@ import eu.fehuworks.djwishlist.service.UserService;
 import eu.fehuworks.djwishlist.service.WishlistService;
 import java.util.Map;
 import java.util.UUID;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -22,7 +23,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,6 +35,12 @@ class GuestControllerTest {
   @MockitoBean private UserService userService;
   @Autowired private MockMvc mockMvc;
   @Captor private ArgumentCaptor<Wish> wishCaptor;
+
+  @BeforeEach
+  void setUp() {
+    // TODO: remove this when @Captor-Annotation works again
+    wishCaptor = ArgumentCaptor.forClass(Wish.class);
+  }
 
   @Test
   void openStartPage_redirect_to_userController_when_userService_isUserKnown_returns_false()
