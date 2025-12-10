@@ -13,19 +13,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <version.plugin.spring-boot-maven-plugin>3.5.7</version.plugin.spring-boot-maven-plugin>
-        <version.plugin.maven-resources-plugin>3.3.1</version.plugin.maven-resources-plugin>
+        <version.plugin.spring-boot-maven-plugin>4.0.0</version.plugin.spring-boot-maven-plugin>
+        <version.plugin.maven-resources-plugin>3.4.0</version.plugin.maven-resources-plugin>
         <version.plugin.maven-compiler-plugin>3.14.1</version.plugin.maven-compiler-plugin>
-        <version.plugin.spotless-maven-plugin>2.46.1</version.plugin.spotless-maven-plugin>
+        <version.plugin.spotless-maven-plugin>3.1.0</version.plugin.spotless-maven-plugin>
         <version.plugin.jacoco-maven-plugin>0.8.14</version.plugin.jacoco-maven-plugin>
-        <version.plugin.sonar-maven-plugin>5.2.0.4988</version.plugin.sonar-maven-plugin>
+        <version.plugin.sonar-maven-plugin>5.5.0.6356</version.plugin.sonar-maven-plugin>
         <version.plugin.pitest-maven-plugin>1.21.1</version.plugin.pitest-maven-plugin>
 
-        <version.dependency.jackson-databind>3.0.1</version.dependency.jackson-databind>
-        <version.dependency.spring-boot>3.5.7</version.dependency.spring-boot>
+        <version.dependency.jackson-databind>3.0.3</version.dependency.jackson-databind>
+        <version.dependency.spring-boot>4.0.0</version.dependency.spring-boot>
         <version.dependency.thymeleaf-layout-dialect>3.4.0</version.dependency.thymeleaf-layout-dialect>
         <version.dependency.lombok>1.18.42</version.dependency.lombok>
-        <version.dependency.junit-jupiter>6.0.0</version.dependency.junit-jupiter>
+        <version.dependency.junit-jupiter>6.0.1</version.dependency.junit-jupiter>
         <version.dependency.mockito-junit-jupiter>5.20.0</version.dependency.mockito-junit-jupiter>
         <version.dependency.pitest-junit5-plugin>1.2.3</version.dependency.pitest-junit5-plugin>
 
@@ -167,6 +167,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${version.dependency.spring-boot}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-webmvc-test</artifactId>
             <version>${version.dependency.spring-boot}</version>
             <scope>test</scope>
         </dependency>
