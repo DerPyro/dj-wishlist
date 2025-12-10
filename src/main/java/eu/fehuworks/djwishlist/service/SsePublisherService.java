@@ -16,39 +16,16 @@ public class SsePublisherService {
   private final Map<String, SseEmitter> emitters = new ConcurrentHashMap<>();
 
   public SseEmitter createSseEmitter(String sessionId) {
-    SseEmitter sseEmitter = sseEmitterFactory.createSseEmitter();
-    sseEmitter.onCompletion(
-        () -> {
-          log.info(
-              "Removing SSE-Emitter from User with SessionID '{}' because of completion",
-              sessionId);
-          emitters.remove(sessionId);
-        });
-    sseEmitter.onTimeout(
-        () -> {
-          log.warn(
-              "Removing SSE-Emitter from User with SessionID '{}' because of timeout", sessionId);
-          emitters.remove(sessionId);
-        });
-    sseEmitter.onError(
-        ex -> {
-          log.warn(
-              "Removing SSE-Emitter from User with SessionID '{}' because of error: {}",
-              sessionId,
-              ex.getMessage());
-          log.trace(ex.getMessage(), ex);
-          emitters.remove(sessionId);
-        });
-    SseEmitter alreadyExisting = emitters.putIfAbsent(sessionId, sseEmitter);
-    if (alreadyExisting == null) {
-      log.info("Created new SSE-Emitter for User with SessionID '{}'", sessionId);
-      return sseEmitter;
-    } else {
+    if (emitters.containsKey(sessionId)) {
       log.debug(
           "Did not create new SSE-Emitter for User with SessionID '{}' because there was already a emitter",
           sessionId);
-      return alreadyExisting;
+      return emitters.get(sessionId);
     }
+    SseEmitter sseEmitter = sseEmitterFactory.createSseEmitter();
+    log.info("Created new SSE-Emitter for User with SessionID '{}'", sessionId);
+    emitters.put(sessionId, sseEmitter);
+    return sseEmitter;
   }
 
   public void sendToAll(Object data) {
@@ -67,6 +44,8 @@ public class SsePublisherService {
         log.error(
             "Sending '{}' to SessionID '{}' raised an error: {}", data, sessionId, e.getMessage());
         log.trace(e.getMessage(), e);
+        emitters.remove(sessionId);
+        log.warn("Removed SSE-Emitter for SessionID '{}' due to error", sessionId);
       }
     }
   }
