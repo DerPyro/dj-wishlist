@@ -139,5 +139,9 @@ Just look at the logs:
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
 
+> HINT: When pipeline fails with 
+``` Error:  Failed to query JRE metadata: GET https://api.sonarcloud.io/analysis/jres?os=linux&arch=x86_64 failed with HTTP 403 Forbidden. Please check the property sonar.token or the environment variable SONAR_TOKEN.```
+> then check if the SONAR_TOKEN is expired: https://sonarcloud.io/account/access-tokens - **it automatically expires after 60 days without usage!**
+
 </details>
 
