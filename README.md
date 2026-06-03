@@ -33,10 +33,12 @@ docker run -p 8080:8080 fehuworks/dj-wishlist
 
 ### Version 0.0.3 / latest [![Work in Progress](https://img.shields.io/badge/work%20in%20progress-orange?logo=construction&logoColor=white)](https://github.com/DerPyro/dj-wishlist/tree/main) [![Get 0.0.2 on Dockerhub](https://badgen.net/badge/icon/Image?icon=docker&label)](https://hub.docker.com/layers/fehuworks/dj-wishlist/latest/images)
 
-[![](https://badgen.net/badge/icon/Built%20on%20Java%2021?color=red&icon=java&label)](https://www.oracle.com/java/technologies/downloads/#java21)
+[![](https://badgen.net/badge/icon/Built%20on%20Java%2025?color=red&icon=java&label)](https://www.oracle.com/java/technologies/downloads/#java25)
 [![](https://badgen.net/badge/icon/Built%20with%20Maven%203.9.11?color=purple&icon=maven&label)](https://maven.apache.org/docs/3.9.11/release-notes.html)
 
 - Added SSE (Server Sent Events) to reload wishlist if something changes
+- Updated Java 21 -> 25
+- Updated dependencies
 
 ### [Version 0.0.2 - 2025-11-07](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.2) [![Get 0.0.2 on Dockerhub](https://badgen.net/badge/icon/Image?icon=docker&label)](https://hub.docker.com/layers/fehuworks/dj-wishlist/0.0.2/images/sha256-977b6980e5576fa4c0bd59ff06b7b732ed133141b8f1acfc40d9ac6fc0fe9b37) [![Get 0.0.2 on Github](https://badgen.net/badge/icon/Code?color=orange&icon=github&label)](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.2)
 
@@ -48,7 +50,7 @@ docker run -p 8080:8080 fehuworks/dj-wishlist
 - Fixed minor bugs
 - Updated dependencies
 - Improved documentation
-- Updated Java
+- Updated Java 17 -> 21
 - Enhanced mobile experience
 
 ### [Version 0.0.1 - 2025-10-29](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.1) [![Get 0.0.1 on Dockerhub](https://badgen.net/badge/icon/Image?icon=docker&label)](https://hub.docker.com/layers/fehuworks/dj-wishlist/0.0.1/images/sha256-90fb28e4b871bf9daf44b45caa7cc877fa92bfe56dc6d92b7c8eacf68549d96f) [![Get 0.0.1 on Github](https://badgen.net/badge/icon/Code?color=orange&icon=github&label)](https://github.com/DerPyro/dj-wishlist/releases/tag/0.0.1)
@@ -136,6 +138,10 @@ Just look at the logs:
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=coverage)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=DerPyro_dj-wishlist&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=DerPyro_dj-wishlist)
+
+> HINT: When pipeline fails with 
+``` Error:  Failed to query JRE metadata: GET https://api.sonarcloud.io/analysis/jres?os=linux&arch=x86_64 failed with HTTP 403 Forbidden. Please check the property sonar.token or the environment variable SONAR_TOKEN.```
+> then check if the SONAR_TOKEN is expired: https://sonarcloud.io/account/access-tokens - **it automatically expires after 60 days without usage!**
 
 </details>
 

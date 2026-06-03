@@ -9,24 +9,23 @@
     <version>0.0.3-SNAPHOT</version>
 
     <properties>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>25</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <version.plugin.spring-boot-maven-plugin>4.0.0</version.plugin.spring-boot-maven-plugin>
-        <version.plugin.maven-resources-plugin>3.4.0</version.plugin.maven-resources-plugin>
-        <version.plugin.maven-compiler-plugin>3.14.1</version.plugin.maven-compiler-plugin>
-        <version.plugin.spotless-maven-plugin>3.1.0</version.plugin.spotless-maven-plugin>
+        <version.plugin.spring-boot-maven-plugin>4.0.6</version.plugin.spring-boot-maven-plugin>
+        <version.plugin.maven-resources-plugin>3.5.0</version.plugin.maven-resources-plugin>
+        <version.plugin.maven-compiler-plugin>3.15.0</version.plugin.maven-compiler-plugin>
+        <version.plugin.spotless-maven-plugin>3.6.0</version.plugin.spotless-maven-plugin>
         <version.plugin.jacoco-maven-plugin>0.8.14</version.plugin.jacoco-maven-plugin>
-        <version.plugin.sonar-maven-plugin>5.5.0.6356</version.plugin.sonar-maven-plugin>
-        <version.plugin.pitest-maven-plugin>1.21.1</version.plugin.pitest-maven-plugin>
+        <version.plugin.sonar-maven-plugin>5.7.0.6970</version.plugin.sonar-maven-plugin>
+        <version.plugin.pitest-maven-plugin>1.25.3</version.plugin.pitest-maven-plugin>
 
-        <version.dependency.jackson-databind>3.0.3</version.dependency.jackson-databind>
-        <version.dependency.spring-boot>4.0.0</version.dependency.spring-boot>
-        <version.dependency.thymeleaf-layout-dialect>3.4.0</version.dependency.thymeleaf-layout-dialect>
-        <version.dependency.lombok>1.18.42</version.dependency.lombok>
-        <version.dependency.junit-jupiter>6.0.1</version.dependency.junit-jupiter>
-        <version.dependency.mockito-junit-jupiter>5.20.0</version.dependency.mockito-junit-jupiter>
+        <version.dependency.jackson-databind>3.1.4</version.dependency.jackson-databind>
+        <version.dependency.spring-boot>4.0.6</version.dependency.spring-boot>
+        <version.dependency.lombok>1.18.46</version.dependency.lombok>
+        <version.dependency.junit-jupiter>6.1.0</version.dependency.junit-jupiter>
+        <version.dependency.mockito-junit-jupiter>5.23.0</version.dependency.mockito-junit-jupiter>
         <version.dependency.pitest-junit5-plugin>1.2.3</version.dependency.pitest-junit5-plugin>
 
         <sonar.organization>fehuworks</sonar.organization>
@@ -66,9 +65,12 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${version.plugin.maven-compiler-plugin}</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <source>${maven.compiler.release}</source>
+                    <target>${maven.compiler.release}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArgs>
+                        <arg>-proc:full</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
@@ -141,11 +143,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
             <version>${version.dependency.spring-boot}</version>
-        </dependency>
-        <dependency>
-            <groupId>nz.net.ultraq.thymeleaf</groupId>
-            <artifactId>thymeleaf-layout-dialect</artifactId>
-            <version>${version.dependency.thymeleaf-layout-dialect}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
