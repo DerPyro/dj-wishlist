@@ -1,5 +1,5 @@
 # Start mit offiziellem OpenJDK-Image
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 
 # Arbeitsverzeichnis anlegen
 WORKDIR /app
